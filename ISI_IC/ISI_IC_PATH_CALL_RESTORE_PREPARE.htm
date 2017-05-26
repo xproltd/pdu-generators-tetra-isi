@@ -1,0 +1,330 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-IC-PATH CALL RESTORE PREPARE</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">Other end SwMI MNI</th>
+                        <td>
+                            MCC <input value="233" size=1 ID="Other_end_SwMI_MNI_MCC" NAME="">
+	                        MNC <input value="73" size=1 ID="Other_end_SwMI_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call timeout</th>
+	                    <td>
+		                    <select ID="Call_timeout" NAME="">                          
+			                    <option value="0x00" >Infnite time
+			                    <option value="0x01" >30 s
+			                    <option value="0x02" >45 s
+			                    <option value="0x03" >60 s
+			                    <option value="0x04" >2 min
+			                    <option value="0x05" >3 min
+			                    <option value="0x06" >4 min
+			                    <option value="0x07" >5 min
+			                    <option value="0x08" >6 min
+			                    <option value="0x09" >8 min
+			                    <option value="0x0A" >10 min
+			                    <option value="0x0B" >12 min
+			                    <option value="0x0C" >15 min
+			                    <option value="0x0D" >20 min
+			                    <option value="0x0E" >30 min
+			                    <option value="0x0F" >Reserved
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Simplex/duplex selection</th>
+	                    <td>
+		                    <select ID="Simplex_duplex_selection" NAME="">                          
+			                    <option value="0x00" >Simplex
+			                    <option value="0x01" >Duplex
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Circuit mode type</th>
+	                    <td>
+		                    <select ID="Circuit_mode_type" onChange="OnChange_Circuit_mode_type(this.form)" NAME="">                          
+			                    <option value="0" >Speech: TCH/S
+			                    <option value="1" >Unprotected: TCH/7,2
+			                    <option value="2" >Low Protection: TCH/4,8, N=1
+			                    <option value="3" >Low Protection: TCH/4,8, N=4
+			                    <option value="4" >Low Protection: TCH/4,8, N=8
+			                    <option value="5" >High Protection: TCH/2,4, N=1
+			                    <option value="6" >High Protection: TCH/2,4, N=4
+			                    <option value="7" >High Protection: TCH/2,4, N=8
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Encryption flag</th>
+	                    <td>
+		                    <select ID="Encryption_flag" NAME="">                          
+			                    <option value="0" >Clear Mode
+			                    <option selected value="1" >TETRA E2EE
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Communication type</th>
+	                    <td>
+		                    <select ID="Communication_type" NAME="Communication_type">                          
+			                    <option value="0" >Point-to-point
+			                    <option selected value="1" >Point-to-multipoint
+			                    <option value="2" >Point-to-multipoint Acknowledged
+			                    <option value="3" >Broadcast
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Slots per frame</th>
+	                    <td>
+		                    <select disabled ID="Slots_per_frame" NAME="">                          
+			                    <option value="0" >One slot
+			                    <option value="1" >Two slots
+			                    <option value="2" >Three slots
+			                    <option selected value="3" >Four slots
+		                    </select>              
+	                    </td>                    
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Speech service</th>
+	                    <td>
+		                    <select ID="Speech_service" NAME="Speech_service">                          
+			                    <option value="0" >TETRA encoded
+			                    <option value="3" >Proprietary encoded
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Speech service used</th>
+	                    <td>
+		                    <select ID="Speech_service_used" NAME="">                          
+			                    <option value="0" >AMR Speech codec
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Security level at calling AI</th>
+	                    <td>
+		                    <select ID="Security_level_at_AI" NAME="">                          
+			                    <option value="0" >No air interface encryption required
+			                    <option selected value="1" >Air interface encryption required 1
+			                    <option value="2" >Air interface encryption required 2
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Controlling SwMI</th>
+	                    <td>
+		                    <select ID="Controlling_SwMI" NAME="">                          
+			                    <option value="0" >The other end SwMI is the controlling SwMI
+			                    <option value="1" >The new SwMI shall be the controlling SwMI
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Transmission grant</th>
+	                    <td>
+		                    <select ID="Transmission_grant" NAME="">                          
+			                    <option value="0" >Transmission granted
+			                    <option value="1" >Transmission not granted
+			                    <option value="2" >Transmission request queued
+			                    <option selected value="3" >Transmission granted to another user
+		                    </select>              
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Transmission request permission</th>
+	                    <td>
+		                    <select ID="Transmission_request_permission" NAME="">                          
+			                    <option value="0" >Allowed to request for transmission
+			                    <option value="1" >Not allowed to request for transmission
+		                    </select>              
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call priority</th>
+	                    <td>
+		                    <select ID="Call_priority" NAME="">                          
+			                    <option value="0x00" >Priority not defined
+			                    <option value="0x01" >Priority 1 (Lowest)
+			                    <option value="0x02" >Priority 2
+			                    <option value="0x03" >Priority 3
+			                    <option value="0x04" >Priority 4
+			                    <option value="0x05" >Priority 5
+			                    <option value="0x06" >Priority 6
+			                    <option value="0x07" >Priority 7
+			                    <option value="0x08" >Priority 8
+			                    <option value="0x09" >Priority 9
+			                    <option value="0x0A" >Priority 10
+			                    <option value="0x0B" >Priority 11
+			                    <option value="0x0C" >Pre-emptive priority 1
+			                    <option value="0x0D" >Pre-emptive priority 2
+			                    <option value="0x0E" >Pre-emptive priority 3
+			                    <option selected value="0x0F" >Pre-emptive priority 4 (Emergency)
+		                    </select>                 
+	                    </td>                         
+                    </tr>
+                    <tr>                    
+                        <th align="left">Call identifier</th>
+                        <td>
+                            <input value="321" size=1 ID="Call_identifier" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Restoring party</th>
+                        <td>
+	                        SSI <input value="62033" size=3 ID="Restoring_party_SSI" NAME="">                    
+                            MCC <input value="244" size=1 ID="Restoring_party_MCC" NAME="">
+	                        MNC <input value="74" size=1 ID="Restoring_party_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">SS-CLIR invoked for other party</th>
+	                    <td>
+		                    <select ID="SS_CLIR_invoked_for_other_party" NAME="">                          
+			                    <option value="0" >SS-CLIR not invoked for the other party
+			                    <option value="1" >SS-CLIR invoked for the other party
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Other party</th>
+                        <td>
+	                        SSI <input value="62033" size=3 ID="Other_party_SSI" NAME="">                    
+                            MCC <input value="244" size=1 ID="Other_party_MCC" NAME="">
+	                        MNC <input value="74" size=1 ID="Other_party_MNC" NAME="">
+                        </td>
+                    </tr>
+	                <tr>                    
+                        <th align="left">Speech services supported</th>
+	                    <td>
+	                        <select onChange="OnEnableDisable_Ctrl(this.form.T2_Speech_services_supported,this.form.Speech_services_supported)" ID="T2_Speech_services_supported" NAME="">                          
+		                        <option selected value="0">T2 Not Present
+		                        <option value="1">T2 Present
+		                    </select>
+		                    <select disabled ID="Speech_services_supported" NAME="">                          
+			                    <option value="1" >AMR Speech codec
+		                    </select>              
+	                    </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "0";
+
+                pdu_bin_value = pdu_header;
+
+                Other_end_SwMI_MNI_MCC          = document.getElementById('Other_end_SwMI_MNI_MCC').value;      
+                Other_end_SwMI_MNI_MNC          = document.getElementById('Other_end_SwMI_MNI_MNC').value;      
+                Call_timeout                    = document.getElementById('Call_timeout').value;      
+                Simplex_duplex_selection        = document.getElementById('Simplex_duplex_selection').value;      
+                Circuit_mode_type               = document.getElementById('Circuit_mode_type').value;      
+                Encryption_flag                 = document.getElementById('Encryption_flag').value;      
+                Communication_type              = document.getElementById('Communication_type').value;      
+                Slots_per_frame                 = document.getElementById('Slots_per_frame').value;      
+                Speech_service                  = document.getElementById('Speech_service').value;      
+                Speech_service_used             = document.getElementById('Speech_service_used').value;      
+                Security_level_at_AI            = document.getElementById('Security_level_at_AI').value;      
+                Controlling_SwMI                = document.getElementById('Controlling_SwMI').value;      
+                Transmission_grant              = document.getElementById('Transmission_grant').value;      
+                Transmission_request_permission = document.getElementById('Transmission_request_permission').value;      
+                Call_priority                   = document.getElementById('Call_priority').value;      
+                Call_identifier                 = document.getElementById('Call_identifier').value;      
+                Restoring_party_SSI             = document.getElementById('Restoring_party_SSI').value;      
+                Restoring_party_MCC             = document.getElementById('Restoring_party_MCC').value;      
+                Restoring_party_MNC             = document.getElementById('Restoring_party_MNC').value;      
+                SS_CLIR_invoked_for_other_party = document.getElementById('SS_CLIR_invoked_for_other_party').value;      
+                Other_party_SSI                 = document.getElementById('Other_party_SSI').value;      
+                Other_party_MCC                 = document.getElementById('Other_party_MCC').value;      
+                Other_party_MNC                 = document.getElementById('Other_party_MNC').value;      
+                T2_Speech_services_supported    = document.getElementById('T2_Speech_services_supported').value;      
+                Speech_services_supported       = document.getElementById('Speech_services_supported').value;      
+                                                                                                                
+                pdu_bin_value += dec2bin(Other_end_SwMI_MNI_MCC,10);
+                pdu_bin_value += dec2bin(Other_end_SwMI_MNI_MNC,14);
+
+                pdu_bin_value += dec2bin(Call_timeout,4);
+                pdu_bin_value += dec2bin(Simplex_duplex_selection,1);
+                
+                pdu_bin_value += dec2bin(Circuit_mode_type,3);
+                pdu_bin_value += dec2bin(Encryption_flag,1);
+                pdu_bin_value += dec2bin(Communication_type,2);
+                if (Circuit_mode_type == 0)
+                {
+                    pdu_bin_value += dec2bin(Speech_service,2);
+                    pdu_bin_value += dec2bin(Speech_service_used,3);
+                }
+                else
+                    pdu_bin_value += dec2bin(Slots_per_frame,2);
+                                
+                pdu_bin_value += dec2bin(Security_level_at_AI,2);
+                pdu_bin_value += dec2bin(Controlling_SwMI,1);
+                pdu_bin_value += dec2bin(Transmission_grant,2);
+                pdu_bin_value += dec2bin(Transmission_request_permission,1);
+                pdu_bin_value += dec2bin(Call_priority,4);
+                pdu_bin_value += dec2bin(Call_identifier,14);
+                    
+                pdu_bin_value += dec2bin(Restoring_party_SSI,24);
+                pdu_bin_value += dec2bin(Restoring_party_MCC,10);
+                pdu_bin_value += dec2bin(Restoring_party_MNC,14);
+                
+                pdu_bin_value += dec2bin(SS_CLIR_invoked_for_other_party,1);
+
+                pdu_bin_value += dec2bin(Other_party_SSI,24);
+                pdu_bin_value += dec2bin(Other_party_MCC,10);
+                pdu_bin_value += dec2bin(Other_party_MNC,14);
+                    
+                T2_pdu_bin_value += T2_Speech_services_supported;
+                if (T2_Speech_services_supported != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Speech_services_supported,8);
+                }
+                
+                T2_str = T2_Speech_services_supported
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+            function OnChange_Circuit_mode_type(form)
+            {
+                Circuit_mode_type = document.getElementById('Circuit_mode_type').value;      
+                if (Circuit_mode_type == "0")
+                {
+                    document.getElementById('Speech_service').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                    document.getElementById('Speech_service_used').disabled = false;
+                }
+                else
+                {
+                    document.getElementById('Speech_service').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                    document.getElementById('Speech_service_used').disabled = true;
+                }
+            }
+        </script>
+    </body>
+</HTML>

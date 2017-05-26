@@ -1,0 +1,91 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI SD PDU generator</TITLE>
+        <SCRIPT SRC="ISI_Util.js" LANGUAGE="JavaScript"></SCRIPT>
+        <LINK href="ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+        <META name="description" content="TETRA ISI (Inter System Interface) - Short Data - PDU Generator" />
+        <META name="keywords" content="Tetra, ISI, SDS, SD, PDU, PDU Generator, Online PDU, Generator, Inter System Interface, Short Data" />	
+    </HEAD>
+    <body marginwidth="10" marginheight="0" topmargin="10" leftmargin="10" style="" class="darkblue">        
+        <a href="http://www.xpro.co" target="_parent"><img border="0" src="xpro.png" align="right" width="120"></a>
+        <form>
+            <p>
+                <span style="font-size:18; color:Gray; font-weight:bolder">ISI Short Data PDU Generator</span>
+                <br>
+                Copyright &#64; <a href="http://www.xpro.co" target="_parent">XPro Ltd</a> 2016
+            </p>
+            <table>
+                <col width="160"/>
+                <tr>
+                    <th class="h" align="right"> Information element</th><th class="h" align="left">Value</th>
+                </tr>
+                <tr>
+                    <th align="left">ISI Type</th><th align="left">ISI-SD</th>
+                </tr>
+                <tr>
+                    <th nowrap align="right">ISI-SD PDU type</th>
+                    <td><select id="ISI_PDU_type" onchange="document.getElementById('ISI_Proto_IFrame').src = GetValue(this.form.ISI_PDU_type.value,0)">
+                                <option value="ISI_SD/ISI_SD_UNITDATA.htm,             000">UNITDATA
+                        </select></td>                                                                         
+                </tr>
+            </table>
+            <iframe name="ISI_Proto_IFrame" id="ISI_Proto_IFrame" onLoad="Autosize_IFrame(this)" frameborder="0" height="360" width="600" src="ISI_SD/ISI_SD_UNITDATA.htm"></iframe>
+            <table>
+            <tr><th>
+            <p>
+                <input type="button" value="Generate" onClick="WritePDUToCtrl(this.form.PDU_Hex_Value)">                
+                <input type="button" value="Write To File" onClick="WritePDUToFile(this.form.FileName.value)">
+                <input id="FileName" value="C:\Temp\ISI_SD_PDUs" size=32 >
+                <br>
+                <br>
+                User Header:  <input id="UserHeader" value="" size=45>
+                Protocol: <select id="Protocol" name="Protocol">
+                                <option selected value="0">ISI Raw 
+                                <option value="1">QSIG/Facility Payload
+                                <option value="2">SIP Payload (ISI Only)
+                                <option value="3">SIP Payload (SDP + ISI)
+                          </select>
+                <br>
+                <br>
+                <textarea id="PDU_Hex_Value" rows="10" cols="60"></textarea>
+            </p>
+            <p><A HREF="ISI_PDU_Generator.htm">ISI Home</A></p>            
+            </th></tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDU_Hex()
+            {
+                Protocol   = document.getElementById('Protocol').value;
+
+                pdu_bin_value = "";                
+                isi_pdu_header = "";
+                isi_pdu_value = "";
+                
+                isi_pdu_header += "0101"; //SD Protocol
+                isi_pdu_header += GetValue(document.getElementById('ISI_PDU_type').value,1); 
+                
+                pdu_bin_value = document.getElementById("ISI_Proto_IFrame").contentWindow.GetPDUValue(isi_pdu_header);
+                                 
+                return document.getElementById('UserHeader').value + bin2hex(pdu_bin_value);
+            }        
+                        
+            function WritePDUToCtrl(ctrl)
+            {
+                pdu_hex_value = GetPDU_by_Protocol(document.getElementById('Protocol').value,"5");                
+                ctrl.value = pdu_hex_value;
+                return pdu_hex_value;
+            }
+
+            function WritePDUToFile(filename)
+            {
+                filename += ".isi";
+                                
+                pdu_hex_value = WritePDUToCtrl(document.getElementById('PDU_Hex_Value'));
+                WriteToFile(filename,pdu_hex_value);
+            }
+        
+        </script>
+    </body>
+</HTML>

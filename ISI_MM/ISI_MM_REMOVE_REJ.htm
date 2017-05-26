@@ -1,0 +1,92 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-MM-REMOVE REJECT</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">ANF-ISIMM invoke id</th>
+                        <td>
+                            <input value="112" size=2 ID="ANF_ISIMM_invoke_id" NAME="">
+                            ISSI <input value="62055" size=5 ID="ISSI" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Subscriber MNI</th>
+                        <td>
+                            MCC <input value="233" size=1 ID="Subscriber_MNI_MCC" NAME="">
+	                        MNC <input value="73" size=1  ID="Subscriber_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">RSI rejection cause</th>
+	                    <td>
+		                    <select ID="Reject_cause" NAME="">                          
+			                    <option value="0x00" >Unknown error
+			                    <option value="0x01" >Unknown SwMI
+			                    <option value="0x02" >Temporary error
+			                    <option value="0x03" >Too old age stamp
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Recovery</th>
+	                    <td>
+		                    <select ID="Recovery" NAME="">                          
+			                    <option value="0x00" >No recovery
+			                    <option value="0x01" >Recovery
+		                    </select>                 
+	                    </td>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "";
+
+                pdu_bin_value = pdu_header;
+
+                ANF_ISIMM_invoke_id         = document.getElementById('ANF_ISIMM_invoke_id').value;      
+                ISSI                        = document.getElementById('ISSI').value; 
+                
+                Subscriber_MNI_MCC          = document.getElementById('Subscriber_MNI_MCC').value;      
+                Subscriber_MNI_MNC          = document.getElementById('Subscriber_MNI_MNC').value;      
+                
+                Reject_cause                = document.getElementById('Reject_cause').value; 
+                Recovery                    = document.getElementById('Recovery').value; 
+
+                pdu_bin_value += dec2bin(ANF_ISIMM_invoke_id,16);
+                pdu_bin_value += dec2bin(ISSI,24);
+
+                pdu_bin_value += dec2bin(Subscriber_MNI_MCC,10);
+                pdu_bin_value += dec2bin(Subscriber_MNI_MNC,14);
+                     
+                pdu_bin_value += dec2bin(Reject_cause,3);
+                pdu_bin_value += dec2bin(Recovery,1);
+                
+                T2_str = "";/*T2_Notification_Indicator*/;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+        </script>
+    </body>
+</HTML>

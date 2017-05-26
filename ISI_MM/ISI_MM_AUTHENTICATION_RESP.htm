@@ -1,0 +1,111 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-MM-AUTHENTICATION RESPONSE</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">ANF-ISIMM invoke id</th>
+                        <td>
+                            <input value="112" size=2 ID="ANF_ISIMM_invoke_id" NAME="">
+                            ISSI <input value="62055" size=5 ID="ISSI" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Session Key (KS)</th>
+                        <td>
+                            <input value="000102030405060708090A0B0C0D0E0F" size=35 ID="Session_Key" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Random Seed (RS)</th>
+                        <td>
+                            <input value="0102030405060708090A" size=30 ID="Random_Seed" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Session Key (KS')</th>
+                        <td>
+                            <input value="0F0E0D0C0B0A09080706050403020100" size=35 ID="Session_Key_Prime" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Validity time</th>
+	                    <td>Type
+		                    <select ID="Validity_time_type" onChange="OnChange_Validity_time_type(this.form)" NAME="">                          
+			                    <option value="0" >Once
+			                    <option value="1" >Hours
+			                    <option value="2" >Days
+			                    <option selected value="3" >Weeks
+			                    <option value="4" >No limit
+		                    </select>             
+		                    Time <input value="17" size=2 ID="Validity_Time" NAME="">
+	                    </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "";
+
+                pdu_bin_value = pdu_header;
+
+                ANF_ISIMM_invoke_id         = document.getElementById('ANF_ISIMM_invoke_id').value;      
+                ISSI                        = document.getElementById('ISSI').value; 
+
+                Session_Key                 = document.getElementById('Session_Key').value; 
+                Random_Seed                 = document.getElementById('Random_Seed').value; 
+                Session_Key_Prime           = document.getElementById('Session_Key_Prime').value; 
+                Validity_time_type          = document.getElementById('Validity_time_type').value; 
+                Validity_Time               = document.getElementById('Validity_Time').value; 
+                
+                pdu_bin_value += dec2bin(ANF_ISIMM_invoke_id,16);
+                pdu_bin_value += dec2bin(ISSI,24);
+                
+                pdu_bin_value += hex2bin(Session_Key);
+                pdu_bin_value += hex2bin(Random_Seed);
+                pdu_bin_value += hex2bin(Session_Key_Prime);
+                     
+                pdu_bin_value += dec2bin(Validity_time_type,3);
+                if ((Validity_time_type >= 1) && (Validity_time_type <= 3))
+                    pdu_bin_value += dec2bin(Validity_Time,5);
+                
+                T2_str = "";/*T2_Notification_Indicator*/;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+            function OnChange_Validity_time_type(form)
+            {
+                Validity_time_type = document.getElementById('Validity_time_type').value;      
+                if ((Validity_time_type >= 1) && (Validity_time_type <= 3))
+                {                
+                    document.getElementById('Validity_Time').disabled = false;
+                }
+                else
+                {
+                    document.getElementById('Validity_Time').disabled = true;
+                }
+            }
+        </script>
+    </body>
+</HTML>

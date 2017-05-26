@@ -1,0 +1,163 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-MM-XXX</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">ANF-ISIMM invoke id</th>
+                        <td>
+                            <input value="112" size=2 ID="ANF_ISIMM_invoke_id" NAME="">
+                            ISSI <input value="62055" size=5 ID="ISSI" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Subscriber MNI</th>
+                        <td>
+                            MCC <input value="233" size=1 ID="Subscriber_MNI_MCC" NAME="">
+	                        MNC <input value="73" size=1  ID="Subscriber_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Visited SwMI MNI</th>
+                        <td>
+                            MCC <input value="233" size=1 ID="Visited_SwMI_MNI_MCC" NAME="">
+	                        MNC <input value="73" size=1  ID="Visited_SwMI_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Migration type</th>
+	                    <td>
+		                    <select ID="Migration_type" NAME="">                          
+			                    <option value="0x00" >Migration
+			                    <option value="0x01" >Migration with call restoration
+			                    <option value="0x02" >Restricted migration
+			                    <option value="0x03" >Restricted migration with call restoration
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call restoration support</th>
+	                    <td>
+		                    <select onChange="OnEnableDisable_Ctrl(this.form.Call_restoration,this.form.PISN)" ID="Call_restoration" NAME="">                          
+			                    <option value="0x00" >Not supported
+			                    <option value="0x01" >Supported
+		                    </select> 
+		                    PISN <input disabled value="123456789" size=15 ID="PISN" NAME="">                
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Recovery</th>
+	                    <td>
+		                    <select ID="Recovery" NAME="">                          
+			                    <option value="0x00" >No recovery
+			                    <option value="0x01" >Recovery
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Forced removal</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Forced_removal,this.form.Forced_removal)" ID="T2_Forced_removal" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Forced_removal" NAME="">                          
+			                    <option value="0x01" >Forced removal
+		                    </select>                 
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Age stamp</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Age_stamp,this.form.Age_stamp)" ID="T2_Age_stamp" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="12345" size=15 ID="Age_stamp" NAME="">                    
+                        </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "";
+
+                pdu_bin_value = pdu_header;
+
+                ANF_ISIMM_invoke_id         = document.getElementById('ANF_ISIMM_invoke_id').value;      
+                ISSI                        = document.getElementById('ISSI').value; 
+                
+                Subscriber_MNI_MCC          = document.getElementById('Subscriber_MNI_MCC').value;      
+                Subscriber_MNI_MNC          = document.getElementById('Subscriber_MNI_MNC').value;      
+                Visited_SwMI_MNI_MCC        = document.getElementById('Visited_SwMI_MNI_MCC').value;      
+                Visited_SwMI_MNI_MNC        = document.getElementById('Visited_SwMI_MNI_MNC').value;      
+                
+                Migration_type              = document.getElementById('Migration_type').value; 
+                Call_restoration            = document.getElementById('Call_restoration').value; 
+                PISN                        = document.getElementById('PISN').value; 
+                Recovery                    = document.getElementById('Recovery').value; 
+                
+                T2_Forced_removal           = document.getElementById('T2_Forced_removal').value; 
+                Forced_removal              = document.getElementById('Forced_removal').value; 
+                T2_Age_stamp                = document.getElementById('T2_Age_stamp').value; 
+                Age_stamp                   = document.getElementById('Age_stamp').value; 
+                
+                pdu_bin_value += dec2bin(ANF_ISIMM_invoke_id,16);
+                pdu_bin_value += dec2bin(ISSI,24);
+                     
+                pdu_bin_value += dec2bin(Subscriber_MNI_MCC,10);
+                pdu_bin_value += dec2bin(Subscriber_MNI_MNC,14);
+                pdu_bin_value += dec2bin(Visited_SwMI_MNI_MCC,10);
+                pdu_bin_value += dec2bin(Visited_SwMI_MNI_MNC,14);
+
+                pdu_bin_value += dec2bin(Migration_type,2);
+                pdu_bin_value += dec2bin(Call_restoration,1);
+                if (Call_restoration == 1)
+                {
+                    pdu_bin_value += dec2bin(PISN.length,5);
+                    pdu_bin_value += digit2bin(PISN);
+                }
+
+                pdu_bin_value += dec2bin(Recovery,1);
+                
+                T2_pdu_bin_value += T2_Forced_removal;
+                if (T2_Forced_removal != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Forced_removal,1);
+                }
+
+                T2_pdu_bin_value += T2_Age_stamp;
+                if (T2_Age_stamp != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Age_stamp,16);
+                }
+
+                
+                T2_str = T2_Forced_removal + T2_Age_stamp;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+        </script>
+    </body>
+</HTML>

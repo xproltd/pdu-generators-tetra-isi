@@ -1,0 +1,316 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-IC-REDIRECT</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+	                    <th align="left">Possible ISI trombone or loop connection detected</th>
+	                    <td>
+		                    <select ID="Possible_ISI_trombone" onChange="OnChange_Possible_ISI_trombone(this.form)"  NAME="">                          
+			                    <option value="0x00" >No possible ISI trombone or...
+			                    <option value="0x01" >Possible ISI trombone or...
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Routeing method response</th>
+	                    <td>
+		                    <select ID="Routeing_method_response" NAME="">                          
+			                    <option value="0" >Forward switching not supported
+			                    <option value="1" >Forward switching supported
+			                    <option value="2" >Select re-routeing
+			                    <option value="3" >Congestion in the SwMI sending this ISI-REDIRECT PDU
+			                    <option value="4" >No N x 8 kbit/s link with next SwMI (see note)
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Called/forwarded-to user having migrated</th>
+	                    <td>
+		                    <select ID="Called_to_user_migrated" onChange="OnChange_Called_to_user_migrated(this.form)" NAME="">                          
+			                    <option value="00" >The called/forwarded-to user has not migrated
+			                    <option selected value="01" >The called/forwarded-to user has migrated
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Visited/forwarded-to SwMI MNI</th>
+                        <td>
+                            MCC <input value="233" size=1 ID="Visited_SwMI_MNI_MCC" NAME="">
+	                        MNC <input value="73" size=1 ID="Visited_SwMI_MNI_MNC" NAME="">
+	                        PISN <input value="123456789" size=20 ID="Visited_SwMI_PISN" NAME="">                    
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">SS-CF invocation counter</th>
+                        <td>
+                            <input value="22" size=1 ID="SS_CF_invocation_counter" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">SS-CF invoked</th>
+	                    <td>
+		                    <select ID="SS_CF_invoked" onChange="OnChange_SS_CF_invoked(this.form)" NAME="">                          
+			                    <option value="00" >SS-CF not invoked 
+			                    <option selected value="01" >SS-CF invoked
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Forwarded-to user</th>
+                        <td>
+	                        SSI <input value="62033" size=3 ID="Forwarded_party_SSI" NAME="">                    
+                            MCC <input value="244" size=1 ID="Forwarded_party_MCC" NAME="">
+	                        MNC <input value="74" size=1 ID="Forwarded_party_MNC" NAME="">
+	                        ESN <input value="123456789" size=15 ID="Forwarded_party_ESN" NAME="">                    
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call identified as fleet call</th>
+	                    <td>
+		                    <select onChange="OnChange_Call_identified_as_fleet_call(this.form)" ID="Call_identified_as_fleet_call" NAME="">                          
+			                    <option value="00" >Not fleet call
+			                    <option selected value="01" >Fleet call
+		                    </select>             
+		                    Fleet SSI <input value="62033" size=3 ID="Fleet_SSI" NAME="">                                                
+		                    Forwarded to Fleet SSI <input value="62033" size=3 ID="Forwarded_to_Fleet_SSI" NAME="">
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">PDU addressed to originating SwMI</th>
+	                    <td>
+		                    <select onChange="OnChange_PDU_to_originating_SwMI(this.form)" ID="PDU_to_originating_SwMI" NAME="">                          
+			                    <option value="00" >The PDU is not addressed to the originating SwMI
+			                    <option selected value="01" >The PDU is addressed to the originating SwMI
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Cause for PDU addressed to originating SwMI</th>
+	                    <td>
+		                    <select ID="Cause_for_PDU_to_originating_SwMI" NAME="">                          
+			                    <option value="0" >No SS-CF invoked, called user migration in originating SwMI
+			                    <option value="1" >Called user barred, having migrated in originating SwMI...
+			                    <option value="2" >Called user barred, having migrated in originating SwMI...
+			                    <option value="7" >SS-CF invoked, SS-CF served user not barred...
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Incoming call barring status</th>
+	                    <td>
+		                    <select ID="Call_barring_status" NAME="">                          
+			                    <option value="0" >Neither SS-BIC nor SS-CAD activated
+			                    <option value="1" >Call authorized by SS-CAD
+			                    <option value="2" >Call barred by SS-BIC
+			                    <option value="3" >Call authorized by SS-BIC
+		                    </select>             
+	                    </td>
+                    </tr>
+	                <tr>                    
+                        <th align="left">Notification indicator</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Notification_Indicator,this.form.Notification_Indicator)" ID="T2_Notification_Indicator" NAME="T2_Notification_Indicator">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="44" size=3 ID="Notification_Indicator" NAME="Notification_Indicator">                    
+                        </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "0";
+
+                pdu_bin_value = pdu_header;
+
+                Possible_ISI_trombone               = document.getElementById('Possible_ISI_trombone').value;      
+                Routeing_method_response            = document.getElementById('Routeing_method_response').value;      
+                Called_to_user_migrated             = document.getElementById('Called_to_user_migrated').value;      
+                Visited_SwMI_MNI_MCC                = document.getElementById('Visited_SwMI_MNI_MCC').value;      
+                Visited_SwMI_MNI_MNC                = document.getElementById('Visited_SwMI_MNI_MNC').value;      
+                Visited_SwMI_PISN                   = document.getElementById('Visited_SwMI_PISN').value;      
+                SS_CF_invocation_counter            = document.getElementById('SS_CF_invocation_counter').value;      
+                SS_CF_invoked                       = document.getElementById('SS_CF_invoked').value;      
+                Forwarded_party_SSI                 = document.getElementById('Forwarded_party_SSI').value;      
+                Forwarded_party_MCC                 = document.getElementById('Forwarded_party_MCC').value;      
+                Forwarded_party_MNC                 = document.getElementById('Forwarded_party_MNC').value;      
+                Forwarded_party_ESN                 = document.getElementById('Forwarded_party_ESN').value;      
+                Call_identified_as_fleet_call       = document.getElementById('Call_identified_as_fleet_call').value;      
+                Fleet_SSI                           = document.getElementById('Fleet_SSI').value;      
+                Forwarded_to_Fleet_SSI              = document.getElementById('Forwarded_to_Fleet_SSI').value;      
+                PDU_to_originating_SwMI             = document.getElementById('PDU_to_originating_SwMI').value;      
+                Cause_for_PDU_to_originating_SwMI   = document.getElementById('Cause_for_PDU_to_originating_SwMI').value;      
+                Call_barring_status                 = document.getElementById('Call_barring_status').value;      
+
+                T2_Notification_Indicator           = document.getElementById('T2_Notification_Indicator').value;      
+                Notification_Indicator              = document.getElementById('Notification_Indicator').value;      
+
+                pdu_bin_value += dec2bin(Possible_ISI_trombone,1);
+                if (Possible_ISI_trombone == 0)
+                {
+                    pdu_bin_value += dec2bin(Routeing_method_response,3);
+                    pdu_bin_value += dec2bin(Called_to_user_migrated,1);
+                    if (Called_to_user_migrated == 1)
+                    {
+                        pdu_bin_value += dec2bin(Visited_SwMI_MNI_MCC,10);
+                        pdu_bin_value += dec2bin(Visited_SwMI_MNI_MNC,14);
+                        pdu_bin_value += dec2bin(Visited_SwMI_PISN.length,5);
+                        if (Visited_SwMI_PISN.length != 0)
+                        {
+                            pdu_bin_value += digit2bin(Visited_SwMI_PISN);
+                        }
+                    }
+                }
+                
+                pdu_bin_value += dec2bin(SS_CF_invocation_counter,5);
+                pdu_bin_value += dec2bin(SS_CF_invoked,1);
+                if (SS_CF_invoked == 1)
+                {
+                    pdu_bin_value += dec2bin(Forwarded_party_SSI,24);
+                    pdu_bin_value += dec2bin(Forwarded_party_MCC,10);
+                    pdu_bin_value += dec2bin(Forwarded_party_MNC,14);
+                    pdu_bin_value += dec2bin(Forwarded_party_ESN.length,5);
+                    if (Forwarded_party_ESN.length != 0)
+                    {
+                        pdu_bin_value += digit2bin(Forwarded_party_ESN);
+                    }
+                }
+                
+                pdu_bin_value += dec2bin(Call_identified_as_fleet_call,1);
+                if (Call_identified_as_fleet_call == 1)
+                {
+                    pdu_bin_value += dec2bin(Fleet_SSI,24);
+                    pdu_bin_value += dec2bin(Forwarded_to_Fleet_SSI,24);
+                }
+
+                pdu_bin_value += dec2bin(PDU_to_originating_SwMI,1);
+                if (PDU_to_originating_SwMI == 1)
+                {
+                    pdu_bin_value += dec2bin(Cause_for_PDU_to_originating_SwMI,1);
+                    pdu_bin_value += dec2bin(Call_barring_status,1);
+                }
+                
+                T2_pdu_bin_value += T2_Notification_Indicator;
+                if (T2_Notification_Indicator != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Notification_Indicator,6);
+                }
+                
+                T2_str = T2_Notification_Indicator
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                      
+                                                 
+            function OnChange_Possible_ISI_trombone(form)
+            {
+                Possible_ISI_trombone = document.getElementById('Possible_ISI_trombone').value;      
+                if (Possible_ISI_trombone == 1)
+                {                
+                    document.getElementById('Routeing_method_response').disabled = true;
+                    document.getElementById('Called_to_user_migrated').disabled = true;
+                    document.getElementById('Visited_SwMI_MNI_MCC').disabled = true;
+                    document.getElementById('Visited_SwMI_MNI_MNC').disabled = true;
+                    document.getElementById('Visited_SwMI_PISN').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Routeing_method_response').disabled = false;
+                    document.getElementById('Called_to_user_migrated').disabled = false;
+                    document.getElementById('Visited_SwMI_MNI_MCC').disabled = false;
+                    document.getElementById('Visited_SwMI_MNI_MNC').disabled = false;
+                    document.getElementById('Visited_SwMI_PISN').disabled = false;
+                    OnChange_Called_to_user_migrated(form);
+                }
+            }
+            
+            function OnChange_Called_to_user_migrated(form)
+            {
+                Called_to_user_migrated = document.getElementById('Called_to_user_migrated').value;      
+                if (Called_to_user_migrated == 0)
+                {                
+                    document.getElementById('Visited_SwMI_MNI_MCC').disabled = true;
+                    document.getElementById('Visited_SwMI_MNI_MNC').disabled = true;
+                    document.getElementById('Visited_SwMI_PISN').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Visited_SwMI_MNI_MCC').disabled = false;
+                    document.getElementById('Visited_SwMI_MNI_MNC').disabled = false;
+                    document.getElementById('Visited_SwMI_PISN').disabled = false;
+                }
+            }            
+            
+            function OnChange_SS_CF_invoked(form)
+            {
+                SS_CF_invoked = document.getElementById('SS_CF_invoked').value;      
+                if (SS_CF_invoked == 0)
+                {                
+                    document.getElementById('Forwarded_party_SSI').disabled = true;
+                    document.getElementById('Forwarded_party_MCC').disabled = true;
+                    document.getElementById('Forwarded_party_MNC').disabled = true;
+                    document.getElementById('Forwarded_party_ESN').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Forwarded_party_SSI').disabled = false;
+                    document.getElementById('Forwarded_party_MCC').disabled = false;
+                    document.getElementById('Forwarded_party_MNC').disabled = false;
+                    document.getElementById('Forwarded_party_ESN').disabled = false;
+                }
+            }                        
+            
+            function OnChange_Call_identified_as_fleet_call(form)
+            {
+                Call_identified_as_fleet_call = document.getElementById('Call_identified_as_fleet_call').value;      
+                if (Call_identified_as_fleet_call== 0)
+                {                
+                    document.getElementById('Fleet_SSI').disabled = true;
+                    document.getElementById('Forwarded_to_Fleet_SSI').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Fleet_SSI').disabled = false;
+                    document.getElementById('Forwarded_to_Fleet_SSI').disabled = false;
+                }
+            }
+            function OnChange_PDU_to_originating_SwMI(form)
+            {
+                PDU_to_originating_SwMI = document.getElementById('PDU_to_originating_SwMI').value;      
+                if (PDU_to_originating_SwMI == 0)
+                {                
+                    document.getElementById('Cause_for_PDU_to_originating_SwMI').disabled = true;
+                    document.getElementById('Call_barring_status').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Cause_for_PDU_to_originating_SwMI').disabled = false;
+                    document.getElementById('Call_barring_status').disabled = false;
+                }
+            }
+            
+        </script>
+    </body>
+</HTML>

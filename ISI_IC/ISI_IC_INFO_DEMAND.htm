@@ -1,0 +1,335 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-IC-INFO DEMAND</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">Call timeout</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Call_timeout,this.form.Call_timeout)" ID="T2_Call_timeout" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Call_timeout" NAME="">                          
+			                    <option value="0x00" >Infnite time
+			                    <option value="0x01" >30 s
+			                    <option value="0x02" >45 s
+			                    <option value="0x03" >60 s
+			                    <option value="0x04" >2 min
+			                    <option value="0x05" >3 min
+			                    <option value="0x06" >4 min
+			                    <option value="0x07" >5 min
+			                    <option value="0x08" >6 min
+			                    <option value="0x09" >8 min
+			                    <option value="0x0A" >10 min
+			                    <option value="0x0B" >12 min
+			                    <option value="0x0C" >15 min
+			                    <option value="0x0D" >20 min
+			                    <option value="0x0E" >30 min
+			                    <option value="0x0F" >Reserved
+		                    </select>             
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Modify request</th>
+                        <td>
+                            <select onChange="OnChange_T2_Modify_request(this.form)" ID="T2_Modify_request" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+	                        <br>Simplex/duplex selection
+		                    <select disabled ID="Simplex_duplex_selection" NAME="">                          
+			                    <option value="0x00" >Simplex
+			                    <option value="0x01" >Duplex
+		                    </select>             
+	                        <br>Circuit mode type
+		                    <select disabled ID="Circuit_mode_type" onChange="OnChange_Circuit_mode_type(this.form)" NAME="">                          
+			                    <option value="0" >Speech: TCH/S
+			                    <option value="1" >Unprotected: TCH/7,2
+			                    <option value="2" >Low Protection: TCH/4,8, N=1
+			                    <option value="3" >Low Protection: TCH/4,8, N=4
+			                    <option value="4" >Low Protection: TCH/4,8, N=8
+			                    <option value="5" >High Protection: TCH/2,4, N=1
+			                    <option value="6" >High Protection: TCH/2,4, N=4
+			                    <option value="7" >High Protection: TCH/2,4, N=8
+		                    </select>             
+	                        <br>Encryption flag
+		                    <select disabled ID="Encryption_flag" NAME="">                          
+			                    <option value="0" >Clear Mode
+			                    <option selected value="1" >TETRA E2EE
+		                    </select>             
+	                        <br>Communication type
+		                    <select disabled ID="Communication_type" NAME="Communication_type">                          
+			                    <option value="0" >Point-to-point
+			                    <option selected value="1" >Point-to-multipoint
+			                    <option value="2" >Point-to-multipoint Acknowledged
+			                    <option value="3" >Broadcast
+		                    </select>             
+	                        <br>Slots per frame
+		                    <select disabled ID="Slots_per_frame" NAME="">                          
+			                    <option value="0" >One slot
+			                    <option value="1" >Two slots
+			                    <option value="2" >Three slots
+			                    <option selected value="3" >Four slots
+		                    </select>              
+	                        <br>Speech service
+		                    <select disabled ID="Speech_service" NAME="Speech_service">                          
+			                    <option value="0" >TETRA encoded
+			                    <option value="3" >Proprietary encoded
+		                    </select>             
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Speech service requested/chosen</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Speech_service_chosen,this.form.Speech_service_chosen)" ID="T2_Speech_service_chosen" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Speech_service_chosen" NAME="">                          
+			                    <option value="0" >AMR Speech codec
+		                    </select>             
+                        </td>
+                    </tr>
+	                <tr>                    
+                        <th align="left">Speech services supported</th>
+	                    <td>
+	                        <select onChange="OnEnableDisable_Ctrl(this.form.T2_Speech_services_supported,this.form.Speech_services_supported)" ID="T2_Speech_services_supported" NAME="">                          
+		                        <option selected value="0">T2 Not Present
+		                        <option value="1">T2 Present
+		                    </select>
+		                    <select disabled ID="Speech_services_supported" NAME="">                          
+			                    <option value="1" >AMR Speech codec
+		                    </select>              
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call status</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Call_status,this.form.Call_status)" ID="T2_Call_status" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Call_status" NAME="">                          
+			                    <option value="0x00" >Call is proceeding
+			                    <option value="0x01" >Call is queued
+			                    <option value="0x02" >Requested subscriber is paged
+			                    <option value="0x03" >Call continue
+			                    <option value="0x04" >Hang time expired
+			                    <option value="0x08" >Call waiting
+			                    <option value="0x09" >Call put on hold
+			                    <option value="0x0A" >Call on hold retrieved
+		                    </select>                 
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Notification indicator</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Notification_Indicator,this.form.Notification_Indicator)" ID="T2_Notification_Indicator">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="44" size=3 ID="Notification_Indicator" NAME="Notification_Indicator">                    
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">DTMF</th>
+                        <td>
+                            <select onChange="OnChange_T3_DTMF(this.form)" ID="T3_DTMF" NAME="">                          
+	                            <option selected value="0">T3 Not Present
+	                            <option value="1">T3 Present
+	                        </select>
+	                        DTMF Type
+		                    <select disabled ID="DTMF_type" onChange="OnChange_DTMF_type(this.form)" NAME="">                          
+			                    <option value="0" >DTMF tone start
+			                    <option value="1" >DTMF tone end
+			                    <option value="2" >DTMF not supported
+			                    <option value="3" >DTMF not subscribed
+		                    </select>             
+		                    <input disabled value="9876543210" size=15 ID="DTMF_digits" NAME="">
+                        </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "";
+
+                pdu_bin_value = pdu_header;
+
+                T2_Call_timeout                 = document.getElementById('T2_Call_timeout').value;      
+                Call_timeout                    = document.getElementById('Call_timeout').value;      
+                T2_Modify_request               = document.getElementById('T2_Modify_request').value;      
+                Simplex_duplex_selection        = document.getElementById('Simplex_duplex_selection').value;      
+                Circuit_mode_type               = document.getElementById('Circuit_mode_type').value;      
+                Encryption_flag                 = document.getElementById('Encryption_flag').value;      
+                Communication_type              = document.getElementById('Communication_type').value;      
+                Slots_per_frame                 = document.getElementById('Slots_per_frame').value;      
+                Speech_service                  = document.getElementById('Speech_service').value;      
+                T2_Speech_service_chosen        = document.getElementById('T2_Speech_service_chosen').value;      
+                Speech_service_chosen           = document.getElementById('Speech_service_chosen').value;      
+                T2_Speech_services_supported    = document.getElementById('T2_Speech_services_supported').value;      
+                Speech_services_supported       = document.getElementById('Speech_services_supported').value;      
+                T2_Call_status                  = document.getElementById('T2_Call_status').value;      
+                Call_status                     = document.getElementById('Call_status').value;      
+                T3_DTMF                         = document.getElementById('T3_DTMF').value;      
+                DTMF_type                       = document.getElementById('DTMF_type').value;      
+                DTMF_digits                     = document.getElementById('DTMF_digits').value;      
+                
+                T2_Notification_Indicator       = document.getElementById('T2_Notification_Indicator').value;      
+                Notification_Indicator          = document.getElementById('Notification_Indicator').value;      
+
+                T2_pdu_bin_value += T2_Call_timeout;
+                if (T2_Call_timeout != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Call_timeout,4);
+                }
+
+                T2_pdu_bin_value += T2_Modify_request;
+                if (T2_Modify_request != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Simplex_duplex_selection,1);
+                    T2_pdu_bin_value += dec2bin(Circuit_mode_type,3);
+                    T2_pdu_bin_value += dec2bin(Encryption_flag,1);
+                    T2_pdu_bin_value += dec2bin(Communication_type,2);
+                    
+                    if (Circuit_mode_type == 0)
+                        T2_pdu_bin_value += dec2bin(Speech_service,2);
+                    else
+                        T2_pdu_bin_value += dec2bin(Slots_per_frame,2);
+                }
+
+                T2_pdu_bin_value += T2_Speech_service_chosen;
+                if (T2_Speech_service_chosen != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Speech_service_chosen,3);
+                }
+
+                T2_pdu_bin_value += T2_Speech_services_supported;
+                if (T2_Speech_services_supported != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Speech_services_supported,8);
+                }
+                
+                
+                T2_pdu_bin_value += T2_Notification_Indicator;
+                if (T2_Notification_Indicator != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Notification_Indicator,6);
+                }
+                
+                T2_pdu_bin_value += T2_Call_status;
+                if (T2_Call_status != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Call_status,4);
+                }
+                                
+                T2_str = T2_Call_timeout + T2_Modify_request + T2_Speech_service_chosen + T2_Speech_services_supported + T2_Call_status + T2_Notification_Indicator + T3_DTMF;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                if (T2 > 0)
+                {
+                    if (T3_DTMF != "0")                
+                    {
+                        T3_pdu_bin_value += "1" + T3_pdu_bin_value;
+                        T3_pdu_bin_value += "0001";//DTMF T3 elem Id
+                        
+                        DTMF_value = dec2bin(DTMF_type,3);
+                        if (DTMF_type == "0")
+                            DTMF_value += digit2bin(DTMF_digits);
+                        
+                        T3_pdu_bin_value += dec2bin(DTMF_value.length,11);
+                        T3_pdu_bin_value += DTMF_value;                    
+                    }
+                        
+                    T3_pdu_bin_value += "0";                    
+                    
+                    pdu_bin_value += T3_pdu_bin_value; 
+                }                
+                return pdu_bin_value;
+            }                                                
+            function OnChange_T2_Modify_request(form)
+            {
+                T2_Modify_request = document.getElementById('T2_Modify_request').value;      
+                if (T2_Modify_request == 0)
+                {
+                    document.getElementById('Simplex_duplex_selection').disabled = true;
+                    document.getElementById('Circuit_mode_type').disabled = true;
+                    document.getElementById('Encryption_flag').disabled = true;
+                    document.getElementById('Communication_type').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                    document.getElementById('Speech_service').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Simplex_duplex_selection').disabled = false;
+                    document.getElementById('Circuit_mode_type').disabled = false;
+                    document.getElementById('Encryption_flag').disabled = false;
+                    document.getElementById('Communication_type').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                    document.getElementById('Speech_service').disabled = false;
+                    OnChange_Circuit_mode_type(form);
+                }                
+            }            
+            function OnChange_Circuit_mode_type(form)
+            {
+                Circuit_mode_type = document.getElementById('Circuit_mode_type').value;      
+                if (Circuit_mode_type == "0")
+                {
+                    document.getElementById('Speech_service').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Speech_service').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                }
+            }
+            function OnChange_T3_DTMF(form)
+            {
+                T3_DTMF = document.getElementById('T3_DTMF').value;      
+                if (T3_DTMF == "0")
+                {
+                    document.getElementById('DTMF_type').disabled = true;
+                    document.getElementById('DTMF_digits').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('DTMF_type').disabled = false;
+                    document.getElementById('DTMF_digits').disabled = false;
+                    OnChange_DTMF_type(form);
+                }
+            }
+            function OnChange_DTMF_type(form)
+            {
+                DTMF_type = document.getElementById('DTMF_type').value;      
+                if (DTMF_type == 0)
+                {
+                    document.getElementById('DTMF_digits').disabled = false;
+                }
+                else
+                {
+                    document.getElementById('DTMF_digits').disabled = true;
+                }
+            }
+        </script>
+    </body>
+</HTML>

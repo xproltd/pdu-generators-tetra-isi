@@ -1,0 +1,59 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-IC-XXX</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <th align="left">Notification indicator</th>
+                    <td>
+                        <select onChange="OnEnableDisable_Ctrl(this.form.T2_Notification_Indicator,this.form.Notification_Indicator)" ID="T2_Notification_Indicator">                          
+	                        <option selected value="0">T2 Not Present
+	                        <option value="1">T2 Present
+	                    </select>
+                        <input disabled value="44" size=3 ID="Notification_Indicator" NAME="Notification_Indicator">                    
+                    </td>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "0";
+
+                pdu_bin_value = pdu_header;
+
+                T2_Notification_Indicator             = document.getElementById('T2_Notification_Indicator').value;      
+                Notification_Indicator                = document.getElementById('Notification_Indicator').value;      
+
+                
+                T2_pdu_bin_value += T2_Notification_Indicator;
+                if (T2_Notification_Indicator != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Notification_Indicator,6);
+                }
+                
+                T2_str = T2_Notification_Indicator
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+        </script>
+    </body>
+</HTML>

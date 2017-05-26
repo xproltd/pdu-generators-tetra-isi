@@ -1,0 +1,71 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-MM-DE-REG REJECT</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">ANF-ISIMM invoke id</th>
+                        <td>
+                            <input value="112" size=2 ID="ANF_ISIMM_invoke_id" NAME="">
+                            ISSI <input value="62055" size=5 ID="ISSI" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">De-registration rejection cause</th>
+	                    <td>
+		                    <select ID="Reject_cause" NAME="">                          
+			                    <option value="0x00" >Unknown error
+			                    <option value="0x01" >Unknown subscriber
+			                    <option value="0x02" >Unknown SwMI
+			                    <option value="0x03" >Temporary error
+			                    <option selected value="0x04" >Service not supported
+			                    <option value="0x05" >Old age stamp
+		                    </select>                 
+	                    </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "";
+
+                pdu_bin_value = pdu_header;
+
+                ANF_ISIMM_invoke_id         = document.getElementById('ANF_ISIMM_invoke_id').value;      
+                ISSI                        = document.getElementById('ISSI').value; 
+                
+                Reject_cause                = document.getElementById('Reject_cause').value; 
+                
+                pdu_bin_value += dec2bin(ANF_ISIMM_invoke_id,16);
+                pdu_bin_value += dec2bin(ISSI,24);
+                     
+                pdu_bin_value += dec2bin(Reject_cause,3);
+                
+                T2_str = "";/*T2_Notification_Indicator*/;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+        </script>
+    </body>
+</HTML>

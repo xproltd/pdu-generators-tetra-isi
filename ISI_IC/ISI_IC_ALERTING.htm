@@ -1,0 +1,238 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-IC-ALERTING</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+	                    <th align="left">Call time-out, set-up phase</th>
+	                    <td>
+		                    <select ID="Call_timeout_setup_phase" NAME="">                          
+			                    <option value="0x00" >Undefined
+			                    <option value="0x01" >1 second
+			                    <option value="0x02" >2 seconds
+			                    <option value="0x03" >5 seconds
+			                    <option selected value="0x04" >10 seconds
+			                    <option value="0x05" >20 seconds
+			                    <option value="0x06" >30 seconds
+			                    <option value="0x07" >60 seconds
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Simplex/duplex selection</th>
+	                    <td>
+		                    <select ID="Simplex_duplex_selection" NAME="">                          
+			                    <option value="0x00" >Simplex
+			                    <option value="0x01" >Duplex
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call status</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Call_status,this.form.Call_status)" ID="T2_Call_status" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Call_status" NAME="">                          
+			                    <option value="0x00" >Call is proceeding
+			                    <option value="0x01" >Call is queued
+			                    <option value="0x02" >Requested subscriber is paged
+			                    <option value="0x03" >Call continue
+			                    <option value="0x04" >Hang time expired
+			                    <option value="0x08" >Call waiting
+			                    <option value="0x09" >Call put on hold
+			                    <option value="0x0A" >Call on hold retrieved
+		                    </select>                 
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Basic service information</th>
+                        <td>
+                            <select onChange="OnChange_T2_Basic_service_information(this.form)" ID="T2_Basic_service_information" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+	                        <br>Circuit mode type
+		                    <select disabled ID="Circuit_mode_type" onChange="OnChange_Circuit_mode_type(this.form)" NAME="">                          
+			                    <option value="0" >Speech: TCH/S
+			                    <option value="1" >Unprotected: TCH/7,2
+			                    <option value="2" >Low Protection: TCH/4,8, N=1
+			                    <option value="3" >Low Protection: TCH/4,8, N=4
+			                    <option value="4" >Low Protection: TCH/4,8, N=8
+			                    <option value="5" >High Protection: TCH/2,4, N=1
+			                    <option value="6" >High Protection: TCH/2,4, N=4
+			                    <option value="7" >High Protection: TCH/2,4, N=8
+		                    </select>             
+	                        <br>Encryption flag
+		                    <select disabled ID="Encryption_flag" NAME="">                          
+			                    <option value="0" >Clear Mode
+			                    <option selected value="1" >TETRA E2EE
+		                    </select>             
+	                        <br>Communication type
+		                    <select disabled ID="Communication_type" NAME="Communication_type">                          
+			                    <option value="0" >Point-to-point
+			                    <option selected value="1" >Point-to-multipoint
+			                    <option value="2" >Point-to-multipoint Acknowledged
+			                    <option value="3" >Broadcast
+		                    </select>             
+	                        <br>Slots per frame
+		                    <select disabled ID="Slots_per_frame" NAME="">                          
+			                    <option value="0" >One slot
+			                    <option value="1" >Two slots
+			                    <option value="2" >Three slots
+			                    <option selected value="3" >Four slots
+		                    </select>              
+	                        <br>Speech service
+		                    <select disabled ID="Speech_service" NAME="Speech_service">                          
+			                    <option value="0" >TETRA encoded
+			                    <option value="3" >Proprietary encoded
+		                    </select>             
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Speech service chosen</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Speech_service_chosen,this.form.Speech_service_chosen)" ID="T2_Speech_service_chosen" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Speech_service_chosen" NAME="">                          
+			                    <option value="0" >AMR Speech codec
+		                    </select>             
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Notification indicator</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Notification_Indicator,this.form.Notification_Indicator)" ID="T2_Notification_Indicator" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="44" size=3 ID="Notification_Indicator" NAME="">                    
+                        </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "0";
+                
+                pdu_bin_value = pdu_header;
+
+                Call_timeout_setup_phase            = document.getElementById('Call_timeout_setup_phase').value;      
+                Simplex_duplex_selection            = document.getElementById('Simplex_duplex_selection').value;      
+                T2_Call_status                      = document.getElementById('T2_Call_status').value;      
+                Call_status                         = document.getElementById('Call_status').value;      
+                T2_Basic_service_information        = document.getElementById('T2_Basic_service_information').value;      
+                Circuit_mode_type                   = document.getElementById('Circuit_mode_type').value;      
+                Encryption_flag                     = document.getElementById('Encryption_flag').value;      
+                Communication_type                  = document.getElementById('Communication_type').value;      
+                Slots_per_frame                     = document.getElementById('Slots_per_frame').value;      
+                Speech_service                      = document.getElementById('Speech_service').value;      
+                T2_Speech_service_chosen            = document.getElementById('T2_Speech_service_chosen').value;      
+                Speech_service_chosen               = document.getElementById('Speech_service_chosen').value;      
+
+                T2_Notification_Indicator           = document.getElementById('T2_Notification_Indicator').value;      
+                Notification_Indicator              = document.getElementById('Notification_Indicator').value;      
+                
+                Rserved = "0";
+
+                pdu_bin_value += dec2bin(Call_timeout_setup_phase,3);
+                pdu_bin_value += dec2bin(Rserved,1);
+                pdu_bin_value += dec2bin(Simplex_duplex_selection,1);
+
+                T2_pdu_bin_value += T2_Call_status;
+                if (T2_Call_status != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Call_status,4);
+                }
+
+                T2_pdu_bin_value += T2_Basic_service_information;
+                if (T2_Basic_service_information != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Circuit_mode_type,3);
+                    T2_pdu_bin_value += dec2bin(Encryption_flag,1);
+                    T2_pdu_bin_value += dec2bin(Communication_type,2);
+                    
+                    if (Circuit_mode_type == 0)
+                        T2_pdu_bin_value += dec2bin(Speech_service,2);
+                    else
+                        T2_pdu_bin_value += dec2bin(Slots_per_frame,2);
+                }
+
+                T2_pdu_bin_value += T2_Speech_service_chosen;
+                if (T2_Speech_service_chosen != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Speech_service_chosen,3);
+                }
+                
+                T2_pdu_bin_value += T2_Notification_Indicator;
+                if (T2_Notification_Indicator != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Notification_Indicator,6);
+                }
+                
+                T2_str = T2_Notification_Indicator + T2_Speech_service_chosen + T2_Basic_service_information + T2_Call_status;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+            function OnChange_T2_Basic_service_information(form)
+            {
+                T2_Basic_service_information = document.getElementById('T2_Basic_service_information').value;      
+                if (T2_Basic_service_information == 0)
+                {
+                    document.getElementById('Circuit_mode_type').disabled = true;
+                    document.getElementById('Encryption_flag').disabled = true;
+                    document.getElementById('Communication_type').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                    document.getElementById('Speech_service').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Circuit_mode_type').disabled = false;
+                    document.getElementById('Encryption_flag').disabled = false;
+                    document.getElementById('Communication_type').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                    document.getElementById('Speech_service').disabled = false;
+                    OnChange_Circuit_mode_type(form);
+                }                
+            }            
+            function OnChange_Circuit_mode_type(form)
+            {
+                Circuit_mode_type = document.getElementById('Circuit_mode_type').value;      
+                if (Circuit_mode_type == "0")
+                {
+                    document.getElementById('Speech_service').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Speech_service').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                }
+            }
+        </script>
+    </body>
+</HTML>

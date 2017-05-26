@@ -1,0 +1,289 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-MM-GROUP ATTACHMENT</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">ANF-ISIMM invoke id</th>
+                        <td>
+                            <input value="112" size=2 ID="ANF_ISIMM_invoke_id" NAME="">
+                            GSSI <input value="62055" size=5 ID="GSSI" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Group MNIs Present</th>
+                        <td>
+                            <select onChange="OnChange_Group_MNI_Present(this.form)" ID="Group_MNI_Present" NAME="">                          
+	                            <option selected value="0">Not Present
+	                            <option value="1">Present
+	                        </select>
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Group MNI</th>
+                        <td>
+                            MCC <input disabled value="233" size=1 ID="Group_MNI_MCC" NAME="">
+	                        MNC <input disabled value="73" size=1  ID="Group_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Visited SwMI MNI</th>
+                        <td>
+                            MCC <input disabled value="233" size=1 ID="Visited_SwMI_MNI_MCC" NAME="">
+	                        MNC <input disabled value="73" size=1  ID="Visited_SwMI_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Group attachment</th>
+	                    <td>
+		                    <select ID="Group_attachment" NAME="">                          
+			                    <option value="0x00" >Subsequent group attachment
+			                    <option value="0x01" >First group attachment
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">SwMI MM initiated</th>
+	                    <td>
+		                    <select ID="SwMI_MM_initiated" NAME="">                          
+			                    <option value="0x00" >Home SwMI MM initiated
+			                    <option value="0x01" >Visited SwMI MM initiated
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Profile exchange support</th>
+	                    <td>
+		                    <select ID="Profile_exchange" NAME="">                          
+			                    <option value="0x00" >Not supported
+			                    <option value="0x01" >Supported
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Subscriber information in group profile</th>
+	                    <td>
+		                    <select ID="Subscriber_information" NAME="">                          
+			                    <option value="0x00" >Not supported
+			                    <option value="0x01" >Supported
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">ISSI</th>
+                        <td>
+                            <input value="62055" size=5 ID="ISSI" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Subscriber MNIs Present</th>
+                        <td>
+                            <select onChange="OnChange_Subscriber_MNI_Present(this.form)" ID="Subscriber_MNI_Present" NAME="">                          
+	                            <option selected value="0">Not Present
+	                            <option value="1">Present
+	                        </select>
+                            MCC <input disabled value="233" size=1 ID="Subscriber_MNI_MCC" NAME="">
+	                        MNC <input disabled value="73" size=1  ID="Subscriber_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Pre-defined profile set reference(s),preferred set</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.Preferred_Profile_Set_Present,this.form.Preferred_Profile_Set)" ID="Preferred_Profile_Set_Present" NAME="">                          
+	                            <option selected value="0">Not Present
+	                            <option value="1">Present
+	                        </select>
+                            <input disabled value="2233" size=1 ID="Preferred_Profile_Set" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Pre-defined profile set reference(s),acceptable set</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.Acceptable_Profile_Set_Present,this.form.Acceptable_Profile_Set)" ID="Acceptable_Profile_Set_Present" NAME="">                          
+	                            <option selected value="0">Not Present
+	                            <option value="1">Present
+	                        </select>
+                            <input disabled value="2234" size=1 ID="Acceptable_Profile_Set" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Recovery</th>
+	                    <td>
+		                    <select ID="Recovery" NAME="">                          
+			                    <option value="0x00" >No recovery
+			                    <option value="0x01" >Recovery
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Age stamp</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Age_stamp,this.form.Age_stamp)" ID="T2_Age_stamp" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="12345" size=15 ID="Age_stamp" NAME="">                    
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">PISN of Visited SwMI</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_PISN,this.form.PISN)" ID="T2_PISN" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="123456789" size=15 ID="PISN" NAME="">                    
+                        </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "";
+
+                pdu_bin_value = pdu_header;
+
+                ANF_ISIMM_invoke_id         = document.getElementById('ANF_ISIMM_invoke_id').value;      
+                GSSI                        = document.getElementById('GSSI').value; 
+                
+                Group_MNI_Present           = document.getElementById('Group_MNI_Present').value; 
+                Group_MNI_MCC               = document.getElementById('Group_MNI_MCC').value;      
+                Group_MNI_MNC               = document.getElementById('Group_MNI_MNC').value;      
+                Visited_SwMI_MNI_MCC        = document.getElementById('Visited_SwMI_MNI_MCC').value;      
+                Visited_SwMI_MNI_MNC        = document.getElementById('Visited_SwMI_MNI_MNC').value;      
+
+                Group_attachment            = document.getElementById('Group_attachment').value; 
+                SwMI_MM_initiated           = document.getElementById('SwMI_MM_initiated').value; 
+                Profile_exchange            = document.getElementById('Profile_exchange').value; 
+                Subscriber_information      = document.getElementById('Subscriber_information').value; 
+                
+                ISSI                        = document.getElementById('ISSI').value; 
+                Subscriber_MNI_Present      = document.getElementById('Subscriber_MNI_Present').value; 
+                Subscriber_MNI_MCC          = document.getElementById('Subscriber_MNI_MCC').value;      
+                Subscriber_MNI_MNC          = document.getElementById('Subscriber_MNI_MNC').value;      
+
+                Preferred_Profile_Set_Present   = document.getElementById('Preferred_Profile_Set_Present').value; 
+                Preferred_Profile_Set           = document.getElementById('Preferred_Profile_Set').value; 
+                Acceptable_Profile_Set_Present  = document.getElementById('Acceptable_Profile_Set_Present').value; 
+                Acceptable_Profile_Set          = document.getElementById('Acceptable_Profile_Set').value; 
+
+                Recovery                    = document.getElementById('Recovery').value; 
+
+                T2_Age_stamp                = document.getElementById('T2_Age_stamp').value; 
+                Age_stamp                   = document.getElementById('Age_stamp').value; 
+                T2_PISN                     = document.getElementById('T2_PISN').value; 
+                PISN                        = document.getElementById('PISN').value; 
+                
+                pdu_bin_value += dec2bin(ANF_ISIMM_invoke_id,16);
+                pdu_bin_value += dec2bin(GSSI,24);
+                     
+                pdu_bin_value += dec2bin(Group_MNI_Present,1);
+                if (Group_MNI_Present == 1)
+                {
+                    pdu_bin_value += dec2bin(Group_MNI_MCC,10);
+                    pdu_bin_value += dec2bin(Group_MNI_MNC,14);
+                    pdu_bin_value += dec2bin(Visited_SwMI_MNI_MCC,10);
+                    pdu_bin_value += dec2bin(Visited_SwMI_MNI_MNC,14);
+                }
+                
+                pdu_bin_value += dec2bin(Group_attachment,1);
+                pdu_bin_value += dec2bin(SwMI_MM_initiated,1);
+                pdu_bin_value += dec2bin(Profile_exchange,1);
+                pdu_bin_value += dec2bin(Subscriber_information,1);
+                
+                pdu_bin_value += dec2bin(ISSI,24);
+                
+                pdu_bin_value += dec2bin(Subscriber_MNI_Present,1);
+                if (Subscriber_MNI_Present == 1)
+                {
+                    pdu_bin_value += dec2bin(Subscriber_MNI_MCC,10);
+                    pdu_bin_value += dec2bin(Subscriber_MNI_MNC,14);
+                }
+
+                pdu_bin_value += dec2bin(Preferred_Profile_Set_Present,1);
+                if (Preferred_Profile_Set_Present == 1)
+                {
+                    pdu_bin_value += dec2bin(Preferred_Profile_Set,16);
+                }
+
+                pdu_bin_value += dec2bin(Acceptable_Profile_Set_Present,1);
+                if (Acceptable_Profile_Set_Present == 1)
+                {
+                    pdu_bin_value += dec2bin(Acceptable_Profile_Set,16);
+                }
+                
+                pdu_bin_value += dec2bin(Recovery,1);
+                
+                T2_pdu_bin_value += T2_Age_stamp;
+                if (T2_Age_stamp != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Age_stamp,16);
+                }
+
+                T2_pdu_bin_value += T2_PISN;
+                if (T2_PISN != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(PISN.length,5);
+                    T2_pdu_bin_value += digit2bin(PISN);
+                }
+                
+                T2_str = T2_Age_stamp + T2_PISN;
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+            function OnChange_Group_MNI_Present(form)
+            {
+                Group_MNI_Present = document.getElementById('Group_MNI_Present').value;      
+                if (Group_MNI_Present != "0")
+                {
+                    document.getElementById('Group_MNI_MCC').disabled = false;
+                    document.getElementById('Group_MNI_MNC').disabled = false;
+                    document.getElementById('Visited_SwMI_MNI_MCC').disabled = false;
+                    document.getElementById('Visited_SwMI_MNI_MNC').disabled = false;
+                }
+                else
+                {
+                    document.getElementById('Group_MNI_MCC').disabled = true;
+                    document.getElementById('Group_MNI_MNC').disabled = true;
+                    document.getElementById('Visited_SwMI_MNI_MCC').disabled = true;
+                    document.getElementById('Visited_SwMI_MNI_MNC').disabled = true;
+                }
+            }
+            function OnChange_Subscriber_MNI_Present(form)
+            {
+                Subscriber_MNI_Present = document.getElementById('Subscriber_MNI_Present').value;      
+                if (Subscriber_MNI_Present != "0")
+                {
+                    document.getElementById('Subscriber_MNI_MCC').disabled = false;
+                    document.getElementById('Subscriber_MNI_MNC').disabled = false;
+                }
+                else
+                {
+                    document.getElementById('Subscriber_MNI_MCC').disabled = true;
+                    document.getElementById('Subscriber_MNI_MNC').disabled = true;
+                }
+            }
+        </script>
+    </body>
+</HTML>

@@ -1,0 +1,454 @@
+<HTML>
+    <HEAD>
+        <TITLE>ISI-IC-CONNECT</TITLE>
+        <SCRIPT SRC="../ISI_Util.js" language="JavaScript" type="text/JavaScript"></SCRIPT>
+        <LINK href="../ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+    </HEAD>
+    <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="" class="darkblue">        
+        <form ID="Form1">
+            <table ID="Table1">
+                <col width="160"/>
+                    <tr>                    
+                        <th align="left">Terminating SwMI MNI</th>
+                        <td>
+                            MCC <input value="233" size=1 ID="Terminating_SwMI_MNI_MCC" NAME="">
+	                        MNC <input value="73" size=1 ID="Terminating_SwMI_MNI_MNC" NAME="">
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call diverted to dispatcher</th>
+	                    <td>
+		                    <select ID="Call_diverted_to_dispatcher" NAME="">                          
+			                    <option value="0" >Not diverted
+			                    <option selected value="1" >Diverted
+		                    </select>              
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call timeout</th>
+	                    <td>
+		                    <select ID="Call_timeout" NAME="">                          
+			                    <option value="0x00" >Infnite time
+			                    <option value="0x01" >30 s
+			                    <option value="0x02" >45 s
+			                    <option value="0x03" >60 s
+			                    <option value="0x04" >2 min
+			                    <option value="0x05" >3 min
+			                    <option value="0x06" >4 min
+			                    <option value="0x07" >5 min
+			                    <option value="0x08" >6 min
+			                    <option value="0x09" >8 min
+			                    <option value="0x0A" >10 min
+			                    <option value="0x0B" >12 min
+			                    <option value="0x0C" >15 min
+			                    <option value="0x0D" >20 min
+			                    <option value="0x0E" >30 min
+			                    <option value="0x0F" >Reserved
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Hook method selection</th>
+	                    <td>
+		                    <select ID="Hook_method_selection" NAME="">                          
+			                    <option value="0x00" >No hook signalling
+			                    <option value="0x01" >Hook On-Off signalling
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Simplex/duplex selection</th>
+	                    <td>
+		                    <select ID="Simplex_duplex_selection" NAME="">                          
+			                    <option value="0x00" >Simplex
+			                    <option value="0x01" >Duplex
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call ownership</th>
+	                    <td>
+		                    <select ID="Call_ownership" NAME="">                          
+			                    <option value="0" >Normal call set-up
+			                    <option selected value="1" >Amalgamated call
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Security level at AI</th>
+	                    <td>
+		                    <select ID="Security_level_at_AI" NAME="">                          
+			                    <option value="0" >No air interface encryption required
+			                    <option selected value="1" >Air interface encryption required 1
+			                    <option value="2" >Air interface encryption required 2
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Resource indicator</th>
+	                    <td>
+		                    <select ID="Resource_indicator" NAME="">                          
+			                    <option value="0" >Resources are reserved
+			                    <option value="1" >Resources could not be reserved
+			                    <option selected value="2" >Resources could not be reserved, delay requested
+		                    </select>              
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Setup resource allocation</th>
+	                    <td>
+		                    <select ID="Setup_resource_allocation" NAME="">                          
+			                    <option value="0x00" >Permanently allocated resources
+			                    <option value="0x01" >Temporary allocated resources
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Connected party presentation indicator</th>
+	                    <td>
+		                    <select ID="Connected_party_presentation_indicator" NAME="">                          
+			                    <option value="0x00" >Presentation allowed
+			                    <option value="0x01" >Presentation restricted
+			                    <option selected value="0x02" >Number not available due to interworking
+			                    <option value="0x03" >Reserved
+		                    </select>                 
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Connected party</th>
+                        <td>
+	                        SSI <input value="62033" size=3 ID="Connected_party_SSI" NAME="">                    
+                            MCC <input value="244" size=1 ID="Connected_party_MCC" NAME="">
+	                        MNC <input value="74" size=1 ID="Connected_party_MNC" NAME="">
+	                        ESN <input value="123456789" size=15 ID="Connected_party_ESN" onChange="OnChange_Connected_party_ESN(this.form)" NAME="">                    
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">MSISDN present as external subscriber number</th>
+	                    <td>
+		                    <select ID="MSISDN_present_as_ESN" NAME="">                          
+			                    <option value="0x00" >Does not correspond to an MSISDN
+			                    <option selected value="0x01" >Corresponds to an MSISDN
+		                    </select>             
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">External subscriber number parameters</th>
+	                    <td>Numbering planidentification
+		                    <select ID="Numbering_plan_identification" NAME="">                          
+			                    <option value="0x00" >Unknown
+			                    <option selected value="0x01" >PSTN/ISDN/GSM
+			                    <option value="0x02" >Reserved
+			                    <option value="0x03" >Data Numbering Plan
+			                    <option value="0x04" >Reserved (Telex)
+			                    <option value="0x05" >Reserved
+			                    <option value="0x06" >Reserved
+			                    <option value="0x07" >Reserved
+			                    <option value="0x08" >National standard numbering plan
+			                    <option value="0x09" >Private numbering plan
+		                    </select>              
+		                    <br>
+		                    Type of number         
+		                    <select ID="Type_of_number" NAME="">                          
+			                    <option value="0" >Unknown/unknown
+			                    <option selected value="1" >International number/level 2 regional number
+			                    <option value="2" >National number/level 1 regional number
+			                    <option value="3" >Network specific number/PISN specific number
+			                    <option value="4" >Subscriber number/level 0 regional number
+		                    </select>              
+		                    <br>
+		                    Screening indicator
+		                    <select ID="Screening_indicator" NAME="">                          
+			                    <option value="0" >User provided, not screened
+			                    <option value="1" >User provided, verified and passed
+			                    <option value="2" >User provided, verified and failed
+			                    <option selected value="3" >Network provided
+		                    </select>              
+	                    </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Call identified as fleet call</th>
+	                    <td>
+		                    <select onChange="OnEnableDisable_Ctrl(this.form.Call_identified_as_fleet_call,this.form.Fleet_SSI)" ID="Call_identified_as_fleet_call" NAME="">                          
+			                    <option value="0x00" >Not fleet call
+			                    <option selected value="0x01" >Fleet call
+		                    </select>             
+		                    Fleet SSI <input value="62033" size=3 ID="Fleet_SSI" NAME="">                                                
+	                    </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Call priority</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Call_priority,this.form.Call_priority)" ID="T2_Call_priority" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Call_priority" NAME="">                          
+			                    <option value="0x00" >Priority not defined
+			                    <option value="0x01" >Priority 1 (Lowest)
+			                    <option value="0x02" >Priority 2
+			                    <option value="0x03" >Priority 3
+			                    <option value="0x04" >Priority 4
+			                    <option value="0x05" >Priority 5
+			                    <option value="0x06" >Priority 6
+			                    <option value="0x07" >Priority 7
+			                    <option value="0x08" >Priority 8
+			                    <option value="0x09" >Priority 9
+			                    <option value="0x0A" >Priority 10
+			                    <option value="0x0B" >Priority 11
+			                    <option value="0x0C" >Pre-emptive priority 1
+			                    <option value="0x0D" >Pre-emptive priority 2
+			                    <option value="0x0E" >Pre-emptive priority 3
+			                    <option selected value="0x0F" >Pre-emptive priority 4 (Emergency)
+		                    </select>                 
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Basic service information</th>
+                        <td>
+                            <select onChange="OnChange_T2_Basic_service_information(this.form)" ID="T2_Basic_service_information" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+	                        <br>Circuit mode type
+		                    <select disabled ID="Circuit_mode_type" onChange="OnChange_Circuit_mode_type(this.form)" NAME="">                          
+			                    <option value="0" >Speech: TCH/S
+			                    <option value="1" >Unprotected: TCH/7,2
+			                    <option value="2" >Low Protection: TCH/4,8, N=1
+			                    <option value="3" >Low Protection: TCH/4,8, N=4
+			                    <option value="4" >Low Protection: TCH/4,8, N=8
+			                    <option value="5" >High Protection: TCH/2,4, N=1
+			                    <option value="6" >High Protection: TCH/2,4, N=4
+			                    <option value="7" >High Protection: TCH/2,4, N=8
+		                    </select>             
+	                        <br>Encryption flag
+		                    <select disabled ID="Encryption_flag" NAME="">                          
+			                    <option value="0" >Clear Mode
+			                    <option selected value="1" >TETRA E2EE
+		                    </select>             
+	                        <br>Communication type
+		                    <select disabled ID="Communication_type" NAME="Communication_type">                          
+			                    <option value="0" >Point-to-point
+			                    <option selected value="1" >Point-to-multipoint
+			                    <option value="2" >Point-to-multipoint Acknowledged
+			                    <option value="3" >Broadcast
+		                    </select>             
+	                        <br>Slots per frame
+		                    <select disabled ID="Slots_per_frame" NAME="">                          
+			                    <option value="0" >One slot
+			                    <option value="1" >Two slots
+			                    <option value="2" >Three slots
+			                    <option selected value="3" >Four slots
+		                    </select>              
+	                        <br>Speech service
+		                    <select disabled ID="Speech_service" NAME="Speech_service">                          
+			                    <option value="0" >TETRA encoded
+			                    <option value="3" >Proprietary encoded
+		                    </select>             
+                        </td>
+                    </tr>
+                    <tr>                    
+	                    <th align="left">Speech service chosen</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Speech_service_chosen,this.form.Speech_service_chosen)" ID="T2_Speech_service_chosen" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+		                    <select disabled ID="Speech_service_chosen" NAME="">                          
+			                    <option value="0" >AMR Speech codec
+		                    </select>             
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <th align="left">Notification indicator</th>
+                        <td>
+                            <select onChange="OnEnableDisable_Ctrl(this.form.T2_Notification_Indicator,this.form.Notification_Indicator)" ID="T2_Notification_Indicator" NAME="">                          
+	                            <option selected value="0">T2 Not Present
+	                            <option value="1">T2 Present
+	                        </select>
+                            <input disabled value="44" size=3 ID="Notification_Indicator" NAME="">                    
+                        </td>
+                    </tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDUValue(pdu_header)
+            {
+                //Get Information Element values
+                
+                //Build PDU
+                
+                T2_pdu_bin_value = "";
+                T3_pdu_bin_value = "0";
+
+                pdu_bin_value = pdu_header;
+
+                Terminating_SwMI_MNI_MCC        = document.getElementById('Terminating_SwMI_MNI_MCC').value;      
+                Terminating_SwMI_MNI_MNC        = document.getElementById('Terminating_SwMI_MNI_MNC').value;      
+                Call_diverted_to_dispatcher     = document.getElementById('Call_diverted_to_dispatcher').value;      
+                Call_timeout                    = document.getElementById('Call_timeout').value;      
+                Hook_method_selection           = document.getElementById('Hook_method_selection').value;      
+                Simplex_duplex_selection        = document.getElementById('Simplex_duplex_selection').value;      
+                Call_ownership                  = document.getElementById('Call_ownership').value;      
+                Security_level_at_AI            = document.getElementById('Security_level_at_AI').value;      
+                Resource_indicator              = document.getElementById('Resource_indicator').value;      
+                Setup_resource_allocation       = document.getElementById('Setup_resource_allocation').value;      
+                Connected_party_presentation_indicator  = document.getElementById('Connected_party_presentation_indicator').value;      
+                Connected_party_SSI             = document.getElementById('Connected_party_SSI').value;      
+                Connected_party_MCC             = document.getElementById('Connected_party_MCC').value;      
+                Connected_party_MNC             = document.getElementById('Connected_party_MNC').value;      
+                Connected_party_ESN             = document.getElementById('Connected_party_ESN').value;      
+                MSISDN_present_as_ESN           = document.getElementById('MSISDN_present_as_ESN').value;      
+                Numbering_plan_identification   = document.getElementById('Numbering_plan_identification').value;      
+                Type_of_number                  = document.getElementById('Type_of_number').value;      
+                Screening_indicator             = document.getElementById('Screening_indicator').value;      
+                Call_identified_as_fleet_call   = document.getElementById('Call_identified_as_fleet_call').value;      
+                Fleet_SSI                       = document.getElementById('Fleet_SSI').value;      
+                T2_Call_priority                = document.getElementById('T2_Call_priority').value;      
+                Call_priority                   = document.getElementById('Call_priority').value;      
+                T2_Basic_service_information    = document.getElementById('T2_Basic_service_information').value;      
+                Circuit_mode_type               = document.getElementById('Circuit_mode_type').value;      
+                Encryption_flag                 = document.getElementById('Encryption_flag').value;      
+                Communication_type              = document.getElementById('Communication_type').value;      
+                Slots_per_frame                 = document.getElementById('Slots_per_frame').value;      
+                Speech_service                  = document.getElementById('Speech_service').value;      
+                T2_Speech_service_chosen        = document.getElementById('T2_Speech_service_chosen').value;      
+                Speech_service_chosen           = document.getElementById('Speech_service_chosen').value;      
+
+                T2_Notification_Indicator       = document.getElementById('T2_Notification_Indicator').value;      
+                Notification_Indicator          = document.getElementById('Notification_Indicator').value;      
+
+                pdu_bin_value += dec2bin(Terminating_SwMI_MNI_MCC,10);
+                pdu_bin_value += dec2bin(Terminating_SwMI_MNI_MNC,14);
+                
+                pdu_bin_value += dec2bin(Call_diverted_to_dispatcher,1);
+                pdu_bin_value += dec2bin(Call_timeout,4);
+                pdu_bin_value += dec2bin(Hook_method_selection,1);
+                pdu_bin_value += dec2bin(Simplex_duplex_selection,1);                
+                pdu_bin_value += dec2bin(Call_ownership,1);                
+                pdu_bin_value += dec2bin(Security_level_at_AI,2);
+
+                pdu_bin_value += dec2bin(Resource_indicator,2);
+                pdu_bin_value += dec2bin(Setup_resource_allocation,1);
+                pdu_bin_value += dec2bin(Connected_party_presentation_indicator,2);
+                
+                pdu_bin_value += dec2bin(Connected_party_SSI,24);
+                pdu_bin_value += dec2bin(Connected_party_MCC,10);
+                pdu_bin_value += dec2bin(Connected_party_MNC,14);
+                
+                pdu_bin_value += dec2bin(Connected_party_ESN.length,5);
+                if (Connected_party_ESN.length != 0)
+                {
+                    pdu_bin_value += digit2bin(Connected_party_ESN);
+                    pdu_bin_value += dec2bin(MSISDN_present_as_ESN,1);                    
+                    pdu_bin_value += dec2bin(Numbering_plan_identification,4);
+                    pdu_bin_value += dec2bin(Type_of_number               ,3);
+                    pdu_bin_value += dec2bin(Screening_indicator          ,2);
+                }
+                
+                pdu_bin_value += dec2bin(Call_identified_as_fleet_call,1);
+                if (Call_identified_as_fleet_call == 1)
+                    pdu_bin_value += dec2bin(Fleet_SSI,24);
+                    
+                T2_pdu_bin_value += T2_Call_priority;
+                if (T2_Call_priority != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Call_priority,4);
+                }
+                    
+                T2_pdu_bin_value += T2_Basic_service_information;
+                if (T2_Basic_service_information != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Circuit_mode_type,3);
+                    T2_pdu_bin_value += dec2bin(Encryption_flag,1);
+                    T2_pdu_bin_value += dec2bin(Communication_type,2);
+                    
+                    if (Circuit_mode_type == 0)
+                        T2_pdu_bin_value += dec2bin(Speech_service,2);
+                    else
+                        T2_pdu_bin_value += dec2bin(Slots_per_frame,2);
+                }
+                    
+                T2_pdu_bin_value += T2_Speech_service_chosen;
+                if (T2_Speech_service_chosen != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Speech_service_chosen,3);
+                }
+
+
+                T2_pdu_bin_value += T2_Notification_Indicator;
+                if (T2_Notification_Indicator != "0")
+                {
+                    T2_pdu_bin_value += dec2bin(Notification_Indicator,6);
+                }
+                
+                T2_str = T2_Call_priority + T2_Basic_service_information + T2_Speech_service_chosen + T2_Notification_Indicator
+                T2 = parseInt(T2_str,2);                
+                if (T2 > 0)
+                    T2_pdu_bin_value = "1" + T2_pdu_bin_value;
+                else
+                    T2_pdu_bin_value = "0";
+                    
+                pdu_bin_value += T2_pdu_bin_value;
+                
+                pdu_bin_value += T3_pdu_bin_value; 
+                
+                return pdu_bin_value;
+            }                                                
+            function OnChange_Connected_party_ESN(form)
+            {
+                Connected_party_ESN = document.getElementById('Connected_party_ESN').value;      
+                if (Connected_party_ESN.length == 0)
+                {                
+                    document.getElementById('MSISDN_present_as_ESN').disabled = true;
+                    document.getElementById('Numbering_plan_identification').disabled = true;
+                    document.getElementById('Type_of_number').disabled = true;
+                    document.getElementById('Screening_indicator').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('MSISDN_present_as_ESN').disabled = false;
+                    document.getElementById('Numbering_plan_identification').disabled = false;
+                    document.getElementById('Type_of_number').disabled = false;
+                    document.getElementById('Screening_indicator').disabled = false;
+                }
+            }
+            function OnChange_T2_Basic_service_information(form)
+            {
+                T2_Basic_service_information = document.getElementById('T2_Basic_service_information').value;      
+                if (T2_Basic_service_information == 0)
+                {
+                    document.getElementById('Circuit_mode_type').disabled = true;
+                    document.getElementById('Encryption_flag').disabled = true;
+                    document.getElementById('Communication_type').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                    document.getElementById('Speech_service').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Circuit_mode_type').disabled = false;
+                    document.getElementById('Encryption_flag').disabled = false;
+                    document.getElementById('Communication_type').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                    document.getElementById('Speech_service').disabled = false;
+                    OnChange_Circuit_mode_type(form);
+                }                
+            }            
+            function OnChange_Circuit_mode_type(form)
+            {
+                Circuit_mode_type = document.getElementById('Circuit_mode_type').value;      
+                if (Circuit_mode_type == "0")
+                {
+                    document.getElementById('Speech_service').disabled = false;
+                    document.getElementById('Slots_per_frame').disabled = true;
+                }
+                else
+                {
+                    document.getElementById('Speech_service').disabled = true;
+                    document.getElementById('Slots_per_frame').disabled = false;
+                }
+            }
+        </script>
+    </body>
+</HTML>

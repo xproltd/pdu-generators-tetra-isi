@@ -1,0 +1,121 @@
+<HTML>
+    <HEAD>
+        <TITLE>Tetra ISI IC PDU generator</TITLE>
+        <SCRIPT SRC="ISI_Util.js" LANGUAGE="JavaScript"></SCRIPT>
+        <LINK href="ISI_PDU_Generator.css" rel="stylesheet" type="text/css">
+        <META name="description" content="TETRA ISI (Inter System Interface) - Individual Call - PDU Generator" />
+        <META name="keywords" content="Tetra, ISI, IC, PDU, PDU Generator, Online PDU, Generator, Inter System Interface, Individual Call" />	
+    </HEAD>
+    <body marginwidth="10" marginheight="0" topmargin="10" leftmargin="10" style="" class="darkblue">        
+        <a href="http://www.xpro.co" target="_parent"><img border="0" src="xpro.png" align="right" width="120"></a>
+        <form>
+            <p>
+                <span style="font-size:18; color:Gray; font-weight:bolder">Tetra ISI Individual Call PDU Generator</span>
+                <br>
+                Copyright &#64; <a href="http://www.xpro.co" target="_parent">XPro Ltd</a> 2016
+            </p>
+            <table>
+                <col width="160"/>
+                <tr>
+                    <th class="h" align="right"> Information element</th><th class="h" align="left">Value</th>
+                </tr>
+                <tr>
+                    <th align="left">ISI Type</th><th align="left">ISI-IC</th>
+                </tr>
+                <tr>
+                    <th nowrap align="right">ISI-IC PDU type</th>
+                    <td><select id="ISI_PDU_type" onchange="document.getElementById('ISI_Proto_IFrame').src = GetValue(this.form.ISI_PDU_type.value,0)">
+                                <option value="ISI_IC/ISI_IC_ALERTING.htm,                  000000">ALERTING
+                                <option value="ISI_IC/ISI_IC_CALL_PROCEEDING.htm,           000001">CALL PROCEEDING
+                                <option value="ISI_IC/ISI_IC_CALL_RESTORE_PREPARE.htm,      000010">CALL RESTORE PREPARE
+                                <option value="ISI_IC/ISI_IC_CALL_RESTORE_PREPARED.htm,     000011">CALL RESTORE PREPARED
+                                <option value="ISI_IC/ISI_IC_CALL_RESTORATION.htm,          000100">CALL-RESTORATION
+                                <option value="ISI_IC/ISI_IC_CONNECT.htm,                   000101">CONNECT
+                                <option value="ISI_IC/ISI_IC_CONNECT_ACK.htm,               000110">CONNECT ACK
+                                <option value="ISI_IC/ISI_IC_DISCONNECT.htm,                000111">DISCONNECT
+                                <option value="ISI_IC/ISI_IC_END_CALL_RESTORE_PREPARE.htm,  001000">END CALL RESTORE PREPARE
+                                <option value="ISI_IC/ISI_IC_FORWARD_SWITCH.htm,            001001">FORWARD SWITCH
+                                <option value="ISI_IC/ISI_IC_INFO_DEMAND.htm,               001010">INFO DEMAND
+                                <option value="ISI_IC/ISI_IC_INFO_REPLY.htm,                001011">INFO REPLY
+                                <option value="ISI_IC/ISI_IC_PATH_CALL_RESTORE_PREPARE.htm, 001100">PATH CALL RESTORE PREPARE
+                                <option value="ISI_IC/ISI_IC_PROGRESS.htm,                  001101">PROGRESS
+                                <option value="ISI_IC/ISI_IC_REDIRECT.htm,                  001110">REDIRECT
+                                <option value="ISI_IC/ISI_IC_SETUP.htm,                     010000">SETUP
+                                <option value="ISI_IC/ISI_IC_SETUP_PROLONGATION.htm,        010001">SETUP PROLONGATION
+                                <option value="ISI_IC/ISI_IC_SIMULTANEOUS_MIGRATION.htm,    010010">SIMULTANEOUS MIGRATION
+                                <option value="ISI_IC/ISI_IC_THROUGH_ALERTING.htm,          010011">THROUGH ALERTING
+                                <option value="ISI_IC/ISI_IC_THROUGH_CONNECT.htm,           010100">THROUGH CONNECT
+                                <option value="ISI_IC/ISI_IC_TX_CEASED_in_ORIG_SwMI.htm,    010101">TX CEASED in ORIG SwMI
+                                <option value="ISI_IC/ISI_IC_TX_CONTINUE_in_ORIG_SwMI.htm,  010110">TX CONTINUE in ORIG SwMI
+                                <option value="ISI_IC/ISI_IC_TX_DEMAND.htm,                 010111">TX DEMAND
+                                <option value="ISI_IC/ISI_IC_TX_GRANTED.htm,                011000">TX GRANTED
+                                <option value="ISI_IC/ISI_IC_TX_INTERRUPT.htm,              011001">TX INTERRUPT
+                                <option value="ISI_IC/ISI_IC_TX_WAIT.htm,                   011010">TX WAIT
+                                <option value="ISI_IC/ISI_IC_QUEUING.htm,                   011011">QUEUING
+                                <option value="ISI_IC/ISI_IC_RESOURCE.htm,                  011100">RESOURCE
+                                <option value="ISI_IC/ISI_IC_TX_CEASED_in_TERM_SwMI.htm,    011101">TX CEASED in TERM SwMI
+                                <option value="ISI_IC/ISI_IC_TX_CONTINUE_in_TERM_SwMI.htm,  011110">TX CONTINUE in TERM SwMI
+                                <option value="ISI_IC/ISI_IC_RESOURCE_RESP.htm,             011111">RESOURCE-RESP
+                        </select></td>                                                                         
+                </tr>
+            </table>
+            <iframe name="ISI_Proto_IFrame" id="ISI_Proto_IFrame" onLoad="Autosize_IFrame(this)" frameborder="0" height="400" width="600" src="ISI_IC/ISI_IC_ALERTING.htm"></iframe>
+            <table>
+            <tr><th>
+            <p>
+                <input type="button" value="Generate" onClick="WritePDUToCtrl(this.form.PDU_Hex_Value)">                
+                <input type="button" value="Write To File" onClick="WritePDUToFile(this.form.FileName.value)">
+                <input id="FileName" value="C:\Temp\ISI_IC_PDUs" size=32 >
+                <br>
+                <br>
+                User Header:  <input id="UserHeader" value="" size=45>
+                Protocol: <select id="Protocol" NAME="Protocol">
+                                <option selected value="0">ISI Raw 
+                                <option value="1">QSIG/Facility Payload
+                                <option value="2">SIP Payload (ISI Only)
+                                <option value="3">SIP Payload (SDP + ISI)
+                          </select>
+                <br>
+                <br>
+                <textarea id="PDU_Hex_Value" rows="10" cols="60"></textarea>
+            </p>
+            <p><A HREF="ISI_PDU_Generator.htm">ISI Home</A></p>            
+            </th></tr>
+            </table>
+        </form>
+        <script language="JavaScript" type="text/JavaScript">
+    
+            function GetPDU_Hex()
+            {
+                Protocol   = document.getElementById('Protocol').value;
+
+                pdu_bin_value = "";                
+                isi_pdu_header = "";
+                isi_pdu_value = "";
+                
+                isi_pdu_header += "0011"; //IC Protocol
+                isi_pdu_header += GetValue(document.getElementById('ISI_PDU_type').value,1); 
+                
+                pdu_bin_value = document.getElementById("ISI_Proto_IFrame").contentWindow.GetPDUValue(isi_pdu_header);
+                                 
+                return document.getElementById('UserHeader').value + bin2hex(pdu_bin_value);
+            }        
+
+            function WritePDUToCtrl(ctrl)
+            {
+                pdu_hex_value = GetPDU_by_Protocol(document.getElementById('Protocol').value,"3");                
+                ctrl.value = pdu_hex_value;
+                return pdu_hex_value;
+            }
+
+            function WritePDUToFile(filename)
+            {
+                filename += ".isi";
+                                
+                pdu_hex_value = WritePDUToCtrl(document.getElementById('PDU_Hex_Value'));
+                WriteToFile(filename,pdu_hex_value);
+            }
+        
+        </script>        
+    </body>
+</HTML>
